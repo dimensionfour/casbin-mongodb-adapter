@@ -522,11 +522,6 @@ ava@^3.0.0:
     write-file-atomic "^3.0.1"
     yargs "^15.1.0"
 
-await-lock@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/await-lock/-/await-lock-2.0.1.tgz#b3f65fdf66e08f7538260f79b46c15bcfc18cadd"
-  integrity sha512-ntLi9fzlMT/vWjC1wwVI11/cSRJ3nTS35qVekNc9WnaoMOP2eWH0RvIqwLQkDjX4a4YynsKEv+Ere2VONp9wxg==
-
 backbone@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/backbone/-/backbone-1.4.0.tgz#54db4de9df7c3811c3f032f34749a4cd27f3bd12"
@@ -713,16 +708,6 @@ camelcase@^5.0.0, camelcase@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
-
-casbin@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/casbin/-/casbin-4.1.1.tgz#201cea6dfb142a224794f4b3f46283c14cc6466a"
-  integrity sha512-3iGx/rcLRh0Bp0HGPiLivtcQbghpUpJ+MiwhwSrf+lbVIkvh38m1FP+smJqN8TyFrtSK1FxAuioRJE3hU6Fv7Q==
-  dependencies:
-    await-lock "^2.0.1"
-    expression-eval "^2.0.0"
-    ip "^1.1.5"
-    lodash "^4.17.15"
 
 chalk@2.4.2, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.0, chalk@^2.4.1, chalk@^2.4.2:
   version "2.4.2"
@@ -1596,13 +1581,6 @@ execa@^1.0.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-expression-eval@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/expression-eval/-/expression-eval-2.1.0.tgz#422915caa46140a7c5b5f248650dea8bf8236e62"
-  integrity sha512-FUJO/Akvl/JOWkvlqZaqbkhsEWlCJWDeZG4tzX96UH68D9FeRgYgtb55C2qtqbORC0Q6x5419EDjWu4IT9kQfg==
-  dependencies:
-    jsep "^0.3.0"
-
 fast-diff@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/fast-diff/-/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
@@ -2217,11 +2195,6 @@ invert-kv@^2.0.0:
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-2.0.0.tgz#7393f5afa59ec9ff5f67a27620d11c226e3eec02"
   integrity sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==
 
-ip@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
-  integrity sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
-
 irregular-plurals@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/irregular-plurals/-/irregular-plurals-3.2.0.tgz#b19c490a0723798db51b235d7e39add44dab0822"
@@ -2520,11 +2493,6 @@ js-yaml@3.13.1, js-yaml@^3.10.0, js-yaml@^3.13.1:
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
-
-jsep@^0.3.0:
-  version "0.3.4"
-  resolved "https://registry.yarnpkg.com/jsep/-/jsep-0.3.4.tgz#55ebd4400c5c5861cb1ff949a7a4cd97fcaacaa0"
-  integrity sha512-ovGD9wE+wvudIIYxZGrRcZCxNyZ3Cl1N7Bzyp7/j4d/tA0BaUwcVM9bu0oZaSrefMiNwv6TwZ9X15gvZosteCQ==
 
 jsesc@^2.5.1:
   version "2.5.2"
@@ -2997,7 +2965,7 @@ mongodb-memory-server@^6.0.1:
   dependencies:
     mongodb-memory-server-core "6.3.3"
 
-mongodb@^3.5.4, mongodb@^3.5.5:
+mongodb@^3.5.4:
   version "3.5.5"
   resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.5.5.tgz#1334c3e5a384469ac7ef0dea69d59acc829a496a"
   integrity sha512-GCjDxR3UOltDq00Zcpzql6dQo1sVry60OXJY3TDmFc2SWFY6c8Gn1Ardidc5jDirvJrx2GC3knGOImKphbSL3A==
