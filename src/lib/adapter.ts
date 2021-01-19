@@ -3,7 +3,8 @@ import {
   Collection,
   MongoClient,
   MongoClientOptions,
-  Db, FilterQuery
+  Db,
+  FilterQuery
 } from 'mongodb';
 import { CasbinRule } from './casbin-rule.entity';
 
@@ -32,7 +33,13 @@ export class MongoAdapter implements Adapter {
       filtered = false
     } = adapterOption;
 
-    const a = new MongoAdapter(uri, databaseName, collectionName, filtered, option);
+    const a = new MongoAdapter(
+      uri,
+      databaseName,
+      collectionName,
+      filtered,
+      option
+    );
     await a.open();
     return a;
   }
@@ -48,7 +55,7 @@ export class MongoAdapter implements Adapter {
     dbName: string,
     collectionName: string,
     filtered: boolean,
-    option?: MongoClientOptions,
+    option?: MongoClientOptions
   ) {
     if (!uri) {
       throw new Error('You must provide Mongo URI to connect to!');
@@ -65,7 +72,7 @@ export class MongoAdapter implements Adapter {
       this.mongoClient = new MongoClient(uri, {
         ...sharedOptions,
         useUnifiedTopology: true,
-        useNewUrlParser: true,
+        useNewUrlParser: true
       });
     } catch (error) {
       throw new Error(error.message);
@@ -82,7 +89,7 @@ export class MongoAdapter implements Adapter {
    * loadPolicy loads all policy rules from the storage.
    */
   public async loadPolicy(model: Model) {
-    await this.loadFilteredPolicy(model)
+    await this.loadFilteredPolicy(model);
   }
 
   /**
@@ -96,8 +103,7 @@ export class MongoAdapter implements Adapter {
         lines = await this.getCollection()
           .find(filter)
           .toArray();
-      }
-      else {
+      } else {
         lines = await this.getCollection()
           .find()
           .toArray();
@@ -157,7 +163,7 @@ export class MongoAdapter implements Adapter {
    * removePolicy removes a policy rule from the storage.
    */
   public async removePolicy(_sec: string, ptype: string, rule: string[]) {
-    const line = this.savePolicyLine(ptype, rule);
+    const line = this.getPolicyLine(ptype, rule);
     await this.getCollection().deleteOne(line);
   }
 
@@ -174,22 +180,22 @@ export class MongoAdapter implements Adapter {
 
     line.ptype = ptype;
 
-    if (fieldIndex <= 0 && 0 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 0 && 0 < fieldIndex + fieldValues.length) {
       line.v0 = fieldValues[0 - fieldIndex];
     }
-    if (fieldIndex <= 1 && 1 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 1 && 1 < fieldIndex + fieldValues.length) {
       line.v1 = fieldValues[1 - fieldIndex];
     }
-    if (fieldIndex <= 2 && 2 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 2 && 2 < fieldIndex + fieldValues.length) {
       line.v2 = fieldValues[2 - fieldIndex];
     }
-    if (fieldIndex <= 3 && 3 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 3 && 3 < fieldIndex + fieldValues.length) {
       line.v3 = fieldValues[3 - fieldIndex];
     }
-    if (fieldIndex <= 4 && 4 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 4 && 4 < fieldIndex + fieldValues.length) {
       line.v4 = fieldValues[4 - fieldIndex];
     }
-    if (fieldIndex <= 5 && 5 < (fieldIndex + fieldValues.length)) {
+    if (fieldIndex <= 5 && 5 < fieldIndex + fieldValues.length) {
       line.v5 = fieldValues[5 - fieldIndex];
     }
     await this.getCollection().deleteMany(line);
@@ -197,10 +203,18 @@ export class MongoAdapter implements Adapter {
 
   public async createDBIndex() {
     try {
-      const indexFields: string[] = ['ptype', 'v0', 'v1', 'v2', 'v3', 'v4', 'v5'];
+      const indexFields: string[] = [
+        'ptype',
+        'v0',
+        'v1',
+        'v2',
+        'v3',
+        'v4',
+        'v5'
+      ];
 
       for (const name of indexFields) {
-        await this.getCollection().createIndex({[name]: 1});
+        await this.getCollection().createIndex({ [name]: 1 });
       }
       // tslint:disable-next-line:no-console
       console.info('Indexes created');
@@ -249,13 +263,26 @@ export class MongoAdapter implements Adapter {
   }
 
   private loadPolicyLine(line: CasbinRule, model: Model) {
-    const result = line.ptype + ', ' + [line.v0, line.v1, line.v2, line.v3, line.v4, line.v5].filter(n => n).join(', ');
+    const result =
+      line.ptype +
+      ', ' +
+      [line.v0, line.v1, line.v2, line.v3, line.v4, line.v5]
+        .filter(n => n)
+        .join(', ');
     Helper.loadPolicyLine(result, model);
   }
 
   private savePolicyLine(ptype: string, rule: string[]): CasbinRule {
     const line = new CasbinRule();
+    return this.createPolicyLine(line, ptype, rule)
+  }
 
+  private getPolicyLine(ptype: string, rule: string[]) {
+    const line: any = {};
+    return this.createPolicyLine(line, ptype, rule)
+  }
+
+  private createPolicyLine(line: any,ptype: string, rule: string[]) {
     line.ptype = ptype;
     if (rule.length > 0) {
       line.v0 = rule[0];
